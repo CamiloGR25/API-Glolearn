@@ -20,7 +20,7 @@ const cursoSchema = mongoose.Schema({
         require: true
     },
     duracion: {
-        type: time,
+        type: Number,
         require: true
     }
 
