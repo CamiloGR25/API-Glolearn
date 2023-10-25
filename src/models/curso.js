@@ -15,7 +15,7 @@ const cursoSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    prerequisitos: {
+    prerrequisitos: {
         type: String,
         require: true
     },

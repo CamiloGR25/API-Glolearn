@@ -12,7 +12,7 @@ app.use(parser.urlencoded({ extended: false })); //permite leer los datos que vi
 app.use(parser.json()); //Transforma los datos al formato json
 
 //Gestionar rutas:
-app.use("/api", cursoRoutes);
+app.use("/glolearn", cursoRoutes);
 app.use(express.json());
 
 //conexion a la BD: se conecta por medio de la variable entorno
