@@ -24,5 +24,17 @@ router.put("/cursos/:id", (req, res) => {
         .then((data) => res.json(data)).catch((error) => res.json({ message: error }))
 });
 
+//consultar todos los cursos:
+router.get("/cursos", (req, res) => {
+    cursoSchema.find()//mostrar los datos
+        .then((data) => res.json(data)).catch((error) => res.json({ message: error }))
+});
+
+//consultar datos por id:
+router.get("/cursos/:id", (req, res) => {
+    const { id } = req.params;
+    cursoSchema.findByID(id)//mostrar por id
+        .then((data) => res.json(data)).catch((error) => res.json({ message: error }))
+});
 
 module.exports = router; // exporta router y sus HTTP
