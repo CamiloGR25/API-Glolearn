@@ -25,3 +25,5 @@ const cursoSchema = mongoose.Schema({
     }
 
 })
+
+module.exports = mongoose.model("curso", cursoSchema);//exportar el modelo curso

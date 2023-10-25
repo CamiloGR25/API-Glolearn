@@ -10,6 +10,6 @@
 
 5. npm install dotenv --save ----> Instalar modulo de dependencias de dotenv (Variable de entorno)
 
-6. Crear un archivo .env con la variable "MONGODB_URI"
+6. Crear un archivo .env con la variable "MONGODB_URI="
 
 7. npm run dev ----> Ejecutar o correr el servidor
