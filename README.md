@@ -1,5 +1,9 @@
 # API-Glolearn
 
+npm i ----> Instalar dependencias
+
+CREAR EL PROYECTO:
+
 1. npm init --yes ----> Iniciar el proyecto con NODEJS (package.json)
 
 2. npm install express --save ----> Instalar dependencias de expres (node_modules y package-lock)
