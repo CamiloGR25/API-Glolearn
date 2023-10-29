@@ -1,6 +1,6 @@
 const mongoose = require("mongoose"); //se importa el componenete mongoose
 
-const personaSchema = mongoose.Schema({
+const usuarioSchema = mongoose.Schema({
     nombre: {
         type: String,
         require: true
@@ -29,7 +29,7 @@ const personaSchema = mongoose.Schema({
         type: Date,
         require: true
     },
-    usuario: {
+    NombreUsuario: {
         type: String,
         require: true
     },
@@ -42,4 +42,4 @@ const personaSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model("persona", personaSchema)//exportar el modelo
+module.exports = mongoose.model("usuario", usuarioSchema)//exportar el modelo
