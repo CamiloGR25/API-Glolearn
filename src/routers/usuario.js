@@ -31,7 +31,7 @@ router.get("/usuarios/:id", (req, res) => {
 });
 
 //eliminar usuario:
-router.delete("/usuarios", (req, res) => {
+router.delete("/usuarios/:id", (req, res) => {
     const { id } = req.params;//constante que recibe el id para eliminar el usuario
     usuarioSchema.findByIdAndDelete(id) //eliminar el usuario
         .then((data) => res.json(data)).catch((error) => res.json({ message: error }))
