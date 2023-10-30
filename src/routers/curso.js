@@ -33,7 +33,7 @@ router.get("/cursos", (req, res) => {
 //consultar datos por id:
 router.get("/cursos/:id", (req, res) => {
     const { id } = req.params;
-    cursoSchema.findByID(id)//mostrar por id
+    cursoSchema.findById(id)//mostrar por id
         .then((data) => res.json(data)).catch((error) => res.json({ message: error }))
 });
 
