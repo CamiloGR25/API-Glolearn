@@ -4,6 +4,7 @@ const mongoose = require("mongoose"); //se importa el componenete mongoose
 const app = express(); //inicia la app con expres
 const port = 3000; //el puerto de la app
 const cursoRoutes = require("./routers/curso")//accede al fichero curso en el routers
+const usuarioRoutes = require("./routers/usuario")//accede al fichero curso en el routers
 
 require("dotenv").config();//cargar las variables de entorno
 
@@ -13,6 +14,7 @@ app.use(parser.json()); //Transforma los datos al formato json
 
 //Gestionar rutas:
 app.use("/glolearn", cursoRoutes);
+app.use("/glolearn", usuarioRoutes);
 app.use(express.json());
 
 //conexion a la BD: se conecta por medio de la variable entorno
