@@ -14,6 +14,12 @@ CREAR EL PROYECTO:
 
 5. npm install dotenv --save ----> Instalar modulo de dependencias de dotenv (Variable de entorno)
 
-6. Crear un archivo .env con la variable "MONGODB_URI="
+6. npm install jsonwebtoken ----> Instalar modulo para encriptar clave web
 
-7. npm run dev ----> Ejecutar o correr el servidor
+7. npm i bcrypt ----> Instalar modulo de bcrypt para la funcion de hashing
+
+EJECUTAR EL PROYECTO:--
+
+- Crear un archivo .env con la variable "MONGODB_URI=" y "SECRET="
+
+- npm run dev ----> Ejecutar o correr el servidor
