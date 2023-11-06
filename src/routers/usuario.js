@@ -2,12 +2,13 @@ const express = require("express"); //libreria de express
 const router = express.Router();//manejador de las rutas
 const usuarioSchema = require("../models/usuario")//entra a la clase usuario en modelos
 const bcrypt = require("bcrypt"); //Encriptar contraseña por medio del hasheoo
-const jwt = require("jsonwebtoken"); //
+const jwt = require("jsonwebtoken"); // importa la libreria de JSON Web Token
 
 //crear usuario:
-router.post("/register", async (req, res) => {
+router.post("user/register", async (req, res) => {
+    //crear constantes con los datos traidos del modelo del usuario:
     const { nombre, apellido, correo, cargo, identificacion, numIdentificacion, fechaNacimiento, nombreUsuario, contraseña } = req.body;
-    const usuario = new usuarioSchema({
+    const usuario = new usuarioSchema({ //crear el usuario de esquema con las constantes
         nombre: nombre,
         apellido: apellido,
         correo: correo,
@@ -18,13 +19,18 @@ router.post("/register", async (req, res) => {
         nombreUsuario: nombreUsuario,
         contraseña: contraseña,
     });
-    usuario.contraseña = await usuario.encryptClave(usuario.contraseña);
-    await usuario.save();
-    //segundo parámetro: un texto que hace que el código generado sea único //tercer parámetro: tiempo de expiración (en segundos, 24 horas en segundos)
-    //primer parámetro: payload - un dato que se agrega para generar el token
-    const token = jwt.sign({ id: usuario._id }, process.env.SECRET, {
-        expiresIn: 60 * 60 * 24, //un día en segundos
-    });
+
+    usuario.contraseña = await usuario.encryptClave(usuario.contraseña); //encripta la clave: (usando bcrypt para hashear la contraseña)
+    await usuario.save(); //guardar en usuario en la BD
+
+    //generar el token:
+    const token = jwt.sign(
+        { id: usuario._id }, //primer parámetro: payload - un dato que se agrega para generar el token
+        process.env.SECRET, //segundo parámetro: un texto que hace que el código generado sea único
+        { expiresIn: 60 * 60 * 24, }); //tercer parámetro: tiempo de expiración (en segundos, 24 horas en segundos)
+    //un día en segundos
+
+    //respuesta
     res.json({
         auth: true,
         token,

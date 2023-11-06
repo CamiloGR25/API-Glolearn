@@ -14,7 +14,7 @@ CREAR EL PROYECTO:
 
 5. npm install dotenv --save ----> Instalar modulo de dependencias de dotenv (Variable de entorno)
 
-6. npm install jsonwebtoken ----> Instalar modulo para encriptar clave web
+6. npm install jsonwebtoken ----> Instalar modulo para encriptar clave web (JSON Web Token)
 
 7. npm i bcrypt ----> Instalar modulo de bcrypt para la funcion de hashing
 
