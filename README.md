@@ -18,7 +18,7 @@ CREAR EL PROYECTO:
 
 7. npm i bcrypt ----> Instalar modulo de bcrypt para la funcion de hashing
 
-EJECUTAR EL PROYECTO:--
+EJECUTAR EL PROYECTO:
 
 - Crear un archivo .env con la variable "MONGODB_URI=" y "SECRET="
 
