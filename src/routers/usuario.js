@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt"); //Encriptar contraseña por medio del hasheoo
 const jwt = require("jsonwebtoken"); // importa la libreria de JSON Web Token
 
 //crear usuario:
-router.post("usuarios/registrar", async (req, res) => {
+router.post("/usuarios/registrar", async (req, res) => {
     //crear constantes con los datos traidos del modelo del usuario:
     const { nombre, apellido, correo, cargo, identificacion, numIdentificacion, fechaNacimiento, nombreUsuario, contraseña } = req.body;
     const usuario = new usuarioSchema({ //crear el usuario de esquema con las constantes
