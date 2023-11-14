@@ -66,8 +66,43 @@ router.delete("/usuarios/:id", (req, res) => {
         .then((data) => res.json(data)).catch((error) => res.json({ message: error }))
 });
 
+//Ingreso de usuario:
+router.post("/usuarios/ingresar", async (req, res) => {
+    // validaciones
+    const { error } = usuarioSchema.validate(req.body.correo, req.body.contraseña);
+    if (error) return res.status(400).json({ error: error.details[0].message });
+    //Buscando el usuario por su dirección de correo
+    const user = await userSchema.findOne({ correo: req.body.correo });
 
+    //validando si no se encuentra
+    if (!user)
+        return res.status(400).json({ error: "Usuario o clave incorrectos" });
 
+    //Transformando la contraseña a su valor original para
+    //compararla con la clave que se ingresa en el inicio de sesión
+    const validPassword = await bcrypt.compare(req.body.clave, user.clave);
+    let accessToken = null;
+    if (!validPassword) {
+        return res.status(400).json({ error: "Usuario o clave incorrectos" });
+    } else {
+        const expiresIn = 24 * 60 * 60;
+        accessToken = jwt.sign(
+            { id: user.id },
+            process.env.SECRET, {
+            expiresIn: expiresIn
+        });
+
+        /*res.json({
+           id: user._id,
+           usuario: user.usuario,
+           correo: user.correo,
+           clave: user.clave,
+           accessToken: accessToken,
+           expiresIn: expiresIn,
+         });*/
+        res.json({ accessToken });
+    }
+});
 
 
 module.exports = router; // exporta router y sus HTTP
