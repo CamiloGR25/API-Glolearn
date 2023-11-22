@@ -3,6 +3,7 @@ const router = express.Router();//manejador de las rutas
 const usuarioSchema = require("../models/usuario")//entra a la clase usuario en modelos
 const bcrypt = require("bcrypt"); //Encriptar contraseña por medio del hasheoo
 const jwt = require("jsonwebtoken"); // importa la libreria de JSON Web Token
+const verifyToken = require("./validate_token");
 
 //crear usuario:
 router.post("/usuarios/registrar", async (req, res) => {
@@ -68,11 +69,12 @@ router.delete("/usuarios/:id", (req, res) => {
 
 //Ingreso de usuario:
 router.post("/usuarios/ingresar", async (req, res) => {
+    console.log('LOGIN***')
     // validaciones
     const { error } = usuarioSchema.validate(req.body.correo, req.body.contraseña);
     if (error) return res.status(400).json({ error: error.details[0].message });
     //Buscando el usuario por su dirección de correo
-    const user = await userSchema.findOne({ correo: req.body.correo });
+    const user = await usuarioSchema.findOne({ correo: req.body.correo });
 
     //validando si no se encuentra
     if (!user)
@@ -80,7 +82,7 @@ router.post("/usuarios/ingresar", async (req, res) => {
 
     //Transformando la contraseña a su valor original para
     //compararla con la clave que se ingresa en el inicio de sesión
-    const validPassword = await bcrypt.compare(req.body.clave, user.clave);
+    const validPassword = await bcrypt.compare(req.body.contraseña, user.contraseña);
     let accessToken = null;
     if (!validPassword) {
         return res.status(400).json({ error: "Usuario o clave incorrectos" });
@@ -103,6 +105,5 @@ router.post("/usuarios/ingresar", async (req, res) => {
         res.json({ accessToken });
     }
 });
-
 
 module.exports = router; // exporta router y sus HTTP

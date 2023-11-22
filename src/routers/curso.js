@@ -4,6 +4,7 @@ const cursoSchema = require("../models/curso")//entra a la clase curso en modelo
 
 //crear curso:
 router.post("/cursos", (req, res) => {
+    console.log("Crear Curso")
     const curso = cursoSchema(req.body);//trae el cuerpo de cursos 
     curso.save()//guarda el curso
         .then((data) => res.json(data)).catch((error) => res.json({ message: error }));
