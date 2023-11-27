@@ -12,6 +12,7 @@ router.post("/cursos", (req, res) => {
 
 //eliminar curso:
 router.delete("/cursos/:id", (req, res) => {
+    console.log("Eliminar")
     const { id } = req.params;//constante que recibe el id para eliminar el curso
     cursoSchema.findByIdAndDelete(id) //eliminar el curso
         .then((data) => res.json(data)).catch((error) => res.json({ message: error }))

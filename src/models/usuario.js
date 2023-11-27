@@ -37,7 +37,13 @@ const usuarioSchema = mongoose.Schema({
     contraseña: {
         type: String,
         require: true
-    }
+    },
+    cursos: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Curso"
+        }
+    ]
 });
 //Encriptar contraseña:
 usuarioSchema.methods.encryptClave = async (contraseña) => {

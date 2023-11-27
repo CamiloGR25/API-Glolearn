@@ -94,16 +94,38 @@ router.post("/usuarios/ingresar", async (req, res) => {
             expiresIn: expiresIn
         });
 
-        /*res.json({
-           id: user._id,
-           usuario: user.usuario,
-           correo: user.correo,
-           clave: user.clave,
-           accessToken: accessToken,
-           expiresIn: expiresIn,
-         });*/
-        res.json({ accessToken });
+        res.json({
+            accessToken: accessToken,
+            cargo: user.cargo,
+            _id: user._id
+        });
     }
 });
+
+//imscribir curso al usuario:
+router.put("/usuarios/inscribirCurso/:id", async (req, res) => {
+    console.log("INSCRIBIR CURSO")
+    const { id } = req.params;
+    const { codigoCurso } = req.body;
+    usuarioSchema.updateOne(
+        { _id: id },
+        {
+            $addToSet: { cursos: codigoCurso }//añadir el curso sin que se peda repetir
+        }
+    ).then((data) => {
+        res.json(data);
+    }).catch((error) => {
+        res.json({ message: error });
+    });
+})
+
+//consultar los datos de los cursos inscritos
+router.get("/usuarios/consultarCursos/:id", (req, res) => {
+    console.log("CONSULTAR CURSOS")
+    const { id } = req.params;
+    usuarioSchema.findById({ _id: id }) //.select('cursos')//mostrar por id
+        .then((data) => res.json(data)).catch((error) => res.json({ message: error }))
+})
+
 
 module.exports = router; // exporta router y sus HTTP
