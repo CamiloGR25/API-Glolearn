@@ -123,7 +123,7 @@ router.put("/usuarios/inscribirCurso/:id", async (req, res) => {
 router.get("/usuarios/consultarCursos/:id", (req, res) => {
     console.log("CONSULTAR CURSOS")
     const { id } = req.params;
-    usuarioSchema.findById({ _id: id }) //.select('cursos')//mostrar por id
+    usuarioSchema.findById({ _id: id })//mostrar por id
         .then((data) => res.json(data)).catch((error) => res.json({ message: error }))
 })
 
